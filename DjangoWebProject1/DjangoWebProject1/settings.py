@@ -1,6 +1,8 @@
 """
 Django settings for DjangoWebProject1 project.
 
+changing some things :3
+
 Based on by 'django-admin startproject' using Django 2.1.2.
 
 For more information on this file, see
