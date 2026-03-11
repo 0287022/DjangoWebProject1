@@ -1,16 +1,33 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from datetime import datetime
+from .models import teacher
+from .forms import InputForm
+
 
 # Create your views here.
 def index(request):
-    now = datetime.now()
-    return render(
-        request,
-        "MyApp1/index.html",
-        {
-            'content' : "Hello Django! Said on ",
-            'time' : now.strftime("%A, %d %B, %Y at %X"),
-            'title' : ':3'
-        }
-    )
+    teach = teacher.objects.all()
+    
+    return render(request, "MyApp1/index.html", {'content' : teach})
+
+def input_view(request):
+
+    if request.method == "POST":
+
+        form = InputForm(request.POST)
+
+
+
+        if form.is_valid():
+
+            form.save()
+
+            return redirect("index")
+
+    else:
+
+        form = InputForm()
+
+
+
+    return render(request, "MyApp1/input.html", {"form": form})
