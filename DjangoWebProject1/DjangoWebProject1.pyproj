@@ -36,7 +36,11 @@
     <Compile Include="DjangoWebProject1\wsgi.py" />
     <Compile Include="MyApp1\admin.py" />
     <Compile Include="MyApp1\apps.py" />
-    <Compile Include="MyApp1\management\commands\importCSV.py">
+    <Compile Include="MyApp1\management\commands\importCourseAreas.py" />
+    <Compile Include="MyApp1\management\commands\importTeachers.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MyApp1\management\commands\removeDuplicates.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MyApp1\migrations\__init__.py" />
