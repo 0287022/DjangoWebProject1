@@ -24,7 +24,10 @@
 
     <label for="CourseArea">Please select a Course Area.</label>
     <select>
-        <option value="mathematics">Mathematics</option>
+        <option>-</option>
+        {% for area in areas %}
+        <option value={{area}}>{{ area }}</option>
+        {% endfor %}
     </select>
 </body>
 </html>
