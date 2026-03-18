@@ -3,33 +3,32 @@ from django.http import HttpResponse
 from .models import teacher
 from .models import courseArea
 from .forms import InputForm
+from .forms import GenerateForm
 
 
 # Create your views here.
 def index(request):
     teach = teacher.objects.all()
-    areas = list(courseArea.objects.values_list('courseArea', flat=True).distinct())
-    print(areas)
-    return render(request, "MyApp1/index.html", {'content' : teach, 'areas': areas})
+    return render(request, "MyApp1/index.html", {'content' : teach})
 
 def input_view(request):
-
     if request.method == "POST":
-
         form = InputForm(request.POST)
-
-
-
         if form.is_valid():
-
             form.save()
-
             return redirect("index")
-
     else:
-
         form = InputForm()
-
-
-
     return render(request, "MyApp1/input.html", {"form": form})
+
+def generate_view(request):
+    areas = list(courseArea.objects.all())
+    if request.method == "POST":
+        form = GenerateForm(request.POST)
+        if form.is_valid():
+            answer = (request.POST.get('dropdown'))
+            print(answer)
+            return redirect("generate")
+    else:
+        form = GenerateForm()
+    return render(request, "MyApp1/generate.html", {"areas": areas, "form": form})

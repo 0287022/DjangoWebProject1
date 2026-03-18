@@ -21,13 +21,6 @@
     <strong>Data not found.</strong>
     {% endif %}
     <p><a href="/input">sign up!</a></p>
-
-    <label for="CourseArea">Please select a Course Area.</label>
-    <select>
-        <option>-</option>
-        {% for area in areas %}
-        <option value={{area}}>{{ area }}</option>
-        {% endfor %}
-    </select>
+    <p><a href="/generate">generate!</a></p>
 </body>
 </html>
