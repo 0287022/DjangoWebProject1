@@ -9,7 +9,20 @@
     <form id="generateForm" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Generate!"/>
+        <input type="submit" value="Generate!" />
     </form>
+    {% if descs %}
+    <table>
+        <tr>
+            <th>Course Description</th>
+        </tr>
+        <tr>
+            <td>{{ descs.courseDesc }}</td>
+        </tr>
+    </table>
+    {% else %}
+    <strong>Data not found.</strong>
+    {% endif %}
+    <p><a href="/index">back!</a></p>
 </body>
 </html>

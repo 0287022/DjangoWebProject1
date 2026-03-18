@@ -1,6 +1,6 @@
 import csv
 from django.core.management import BaseCommand
-from MyApp1.models import teacher
+from MyApp1.models import courseDescription
 
 class Command(BaseCommand):
     help = "Help me please"
@@ -8,12 +8,13 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('--path', type=str)
 
-    def handle(self, *args, **kwargs):
+    def handle(self, **kwargs):
         path=kwargs['path']
         with open(path, 'rt', encoding='utf-8-sig') as f:
             reader = csv.reader(f, dialect='excel')
-            teacher_count = 0
+            count = 0
             for row in reader:
-                teacher_count += 1
-                teacher.objects.create(Name=row[0], Area=row[1])
-            print('Added ' + str(teacher_count) + " teachers")
+                count += 1
+                print(row[0])
+                courseDescription.objects.create(courseDesc=row[1])
+            print('Added ' + str(count) + " courses")
