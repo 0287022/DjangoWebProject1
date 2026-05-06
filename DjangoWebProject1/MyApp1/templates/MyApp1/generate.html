@@ -11,5 +11,18 @@
         {{ form.as_p }}
         <input type="submit" value="Generate!"/>
     </form>
+    {% if descs %}
+    <table>
+        <tr>
+            <th>Course Description</th>
+        </tr>
+        <tr>
+            <td>{{ descs.courseDesc }}</td>
+        </tr>
+    </table>
+    {% else %}
+    <strong>Data not found.</strong>
+    {% endif %}
+    <p><a href="{% url 'index' %}">back!</a></p>
 </body>
 </html>
