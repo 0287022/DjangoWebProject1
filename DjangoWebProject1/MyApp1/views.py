@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import teacher
-from .models import courseArea
+from .models import *
 from .forms import InputForm, GenerateForm
 
 from pypdf import PdfReader, PdfWriter
@@ -28,13 +28,15 @@ def input_view(request):
     return render(request, "MyApp1/input.html", {"form": form})
 
 def generate_view(request):
-    areas = list(courseArea.objects.all())
+    descs = courseDescription.objects.all()
+    current_course = -1
     if request.method == "POST":
         form = GenerateForm(request.POST)
         if form.is_valid():
-            answer = (request.POST.get('dropdown'))
-            print(answer)
-            return redirect("generate")
+            current_course = int(request.POST.get('dropdown')) - 1
+            print(current_course)
+            if current_course == -1: return render(request, "MyApp1/generate.html", {"form": form})
+            return render(request, "MyApp1/generate.html", {"form": form, 'descs': descs[current_course]})
     else:
         form = GenerateForm()
     return render(request, "MyApp1/generate.html", {"form": form})

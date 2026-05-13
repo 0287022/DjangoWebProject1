@@ -40,6 +40,9 @@
     <Compile Include="MyApp1\management\commands\importTeachers.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MyApp1\management\commands\importCourseDescriptions.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MyApp1\management\commands\removeDuplicates.py">
       <SubType>Code</SubType>
     </Compile>
