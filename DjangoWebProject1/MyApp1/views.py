@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from .models import teacher
 from .models import *
 from .forms import InputForm, GenerateForm
-
 from pypdf import PdfReader, PdfWriter
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Table

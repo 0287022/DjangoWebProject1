@@ -17,5 +17,8 @@ class InputForm(forms.ModelForm):
         fields = ['Name', 'Area']
 class GenerateForm(forms.Form):
     options = zip(values, combination)
-    dropdown = forms.ChoiceField(choices=options, widget=forms.Select)
+    dropdown = forms.ChoiceField(choices=options, widget=forms.Select, label="Select Course:")
+class OutlineForm(forms.Form):
+    assessmentYear = forms.IntegerField(min_value=2000, max_value=2050, initial=2000)
+    assessmentSemester = forms.IntegerField(min_value = 1, max_value = 2)
 
