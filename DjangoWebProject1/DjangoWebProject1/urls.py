@@ -30,5 +30,8 @@ urlpatterns = [
     re_path(r'home^$', MyApp1.views.index, name = 'home'),
     re_path(r'input', MyApp1.views.input_view, name = 'input'),
     re_path(r'generate', MyApp1.views.generate_view, name = 'generate'),
-    path('report/', MyApp1.views.report, name = 'report')
+    re_path(r'dropdown', MyApp1.views.dropdown_view, name = 'dropdown'),
+    path('report/', MyApp1.views.report, name = 'report'),
+    path('ajax/load-courses/', MyApp1.views.load_courses, name='ajax_load_courses'), # AJAX
+
 ]

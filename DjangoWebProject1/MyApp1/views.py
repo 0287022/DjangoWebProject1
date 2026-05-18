@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import teacher
 from .models import *
-from .forms import InputForm, GenerateForm
+from .forms import *
 from pypdf import PdfReader, PdfWriter
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Table
@@ -57,6 +57,15 @@ def generate_pdf():
     buffer.seek(0)
     return buffer
 
+def dropdown_view(request):
+    if request.method == "POST":
+        form = OutlineForm(request.POST)
+        if form.is_valid():
+            return redirect("index")
+    else:
+        form = OutlineForm()
+    return render(request, "MyApp1/dependentdropdown.html", {'form': form})
+
 def report(request):
     pdf_file = staticfiles_storage.path("DigitalSolutions.pdf")
     try:
@@ -77,3 +86,8 @@ def report(request):
         response = FileResponse(generate_pdf(), as_attachment = True, filename="awawa_:(.pdf")
 
     return response
+# The variable comes in from the AJAX request initialized.
+# Idea behind this is to render data from a different (!!) HTML page whenever the load-courses command is called, onto the data we know.
+
+def load_courses(request):
+    courseAreaCode = request.GET.get('')
