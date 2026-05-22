@@ -90,4 +90,6 @@ def report(request):
 # Idea behind this is to render data from a different (!!) HTML page whenever the load-courses command is called, onto the data we know.
 
 def load_courses(request):
-    courseAreaCode = request.GET.get('')
+    courseID = request.GET.get('course_id')
+    courses = courseData.objects.filter(course_id=courseID).all()
+    return render(request, 'MyApp1/formoptions.html')

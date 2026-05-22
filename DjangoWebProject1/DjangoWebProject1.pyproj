@@ -60,6 +60,7 @@
     <Content Include="MyApp1\templates\MyApp1\input.html" />
     <Content Include="MyApp1\templates\MyApp1\generate.html" />
     <Content Include="MyApp1\templates\MyApp1\dependentdropdown.html" />
+    <Content Include="MyApp1\templates\MyApp1\formoptions.html" />
     <Content Include="requirements.txt" />
     <Content Include="static\DigitalSolutions.pdf" />
   </ItemGroup>

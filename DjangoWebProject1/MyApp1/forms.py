@@ -1,7 +1,7 @@
 
 from django import forms
 from .models import teacher
-from .models import courseArea
+from .models import *
 areas = []
 for d in list(courseArea.objects.all().values("courseArea")): areas.append(d["courseArea"])
 courses = []
@@ -18,7 +18,20 @@ class InputForm(forms.ModelForm):
 class GenerateForm(forms.Form):
     options = zip(values, combination)
     dropdown = forms.ChoiceField(choices=options, widget=forms.Select, label="Select Course:")
-class OutlineForm(forms.Form):
-    assessmentYear = forms.IntegerField(min_value=2000, max_value=2050, initial=2000, label = "Assessment Year")
-    assessmentSemester = forms.IntegerField(min_value = 1, max_value = 2, label = "Assessment Semester")
+class OutlineForm(forms.ModelForm):
+    class Meta:
+        model = courseForm
+        fields = "__all__"
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['course'].queryset = courseData.objects.none()
+
+        if 'courseArea' in self.data:
+            try:
+                courseAreaID = int(self.data.get('courseArea'))
+                self.fields['course'].queryset = courseData.objects.filter().order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['city'].queryset = self.instance.country.city_set.order_by('name')
 
